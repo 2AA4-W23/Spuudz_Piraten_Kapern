@@ -35,7 +35,7 @@ Remark: **We are assuming here you are using a _real_ shell (e.g., anything but 
 | x   | F04 | End the turn when the player obtains 3 skulls | D | 01/16/23 | 01/16/23 |
 | x   | F05 | Player chooses which dice to keep randomly | D | 01/16/23 | 01/16/23 | 
 | x   | F06 | Score points: count num of gold coins and diamonds and \*100| D | 01/16/23 | 01/16/23 |
-| x   | F07 | Simulation ends when one player's score exceeds 6000 | P | |
+| x   | F07 | Simulation ends when one player's score exceeds 6000 | D | 01/16/23 | 01/16/23 |
 | x   | F08 | Calculate and display each player's win percentage | P | | 
 | ... | ... | ... |
 
