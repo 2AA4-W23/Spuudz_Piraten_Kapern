@@ -10,6 +10,13 @@ public class Player {
         score = 0;
         numSkull = 0;
     }
+    public int getScore(){
+        return score;
+    }
+    public ArrayList<String> getHand(){
+        return currentHand;
+    }
+
 
     public void rollEight(){
         ArrayList<String> randomHand = new ArrayList<String>();
@@ -19,6 +26,17 @@ public class Player {
             randomHand.add(myRoll);
         }
         currentHand = randomHand;
+        updateScore();
+    }
+
+    public void updateScore(){
+        int count = 0;
+        for(int i = 0; i < currentHand.size(); i++){
+            if (currentHand.get(i) == "DIAMOND" || currentHand.get(i) == "GOLD"){
+                count++;
+            }
+        }
+        score+=(count*100);
     }
 
 
