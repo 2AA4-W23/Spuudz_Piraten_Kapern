@@ -24,22 +24,20 @@ public class Player {
 
     public void rollEight(){
         ArrayList<String> randomHand = new ArrayList<String>();
-        randomHand = currentHand;
+        numSkull = 0;
         Dice myDice = new Dice();
-        while(numSkull < 3){
-            for (int i = 0; i < (8-numSkull); i++){
+            for (int i = 0; i < 8; i++){
                 String myRoll = myDice.roll().toString();
-                randomHand.set(i,myRoll);
+                randomHand.add(myRoll);
             }
-            System.out.println(randomHand);
+            System.out.println("Initial Roll: " + randomHand);
             removeSkulls(randomHand);
-            System.out.println(randomHand);
-            reroll(randomHand,myDice,numSkull);
-            System.out.println(randomHand);
-            removeSkulls(randomHand);
-            System.out.println(randomHand);
-            System.out.println("------------------");
-        }
+            while(numSkull<3){
+                System.out.println("Reroll!");
+                reroll(randomHand,myDice,numSkull);
+                System.out.println(randomHand);
+                removeSkulls(randomHand);
+            }
         currentHand = randomHand;
         updateScore();
     }
@@ -49,9 +47,9 @@ public class Player {
                 randomHand.remove(String.valueOf("SKULL"));
                 numSkull++;
                 i--;
-                System.out.println("DEBUG found a skull");
             }
         }
+        System.out.println(numSkull + " skull(s) found overall.\n");
     }
     public void reroll(ArrayList<String> randomHand, Dice myDice,int numSkull){
         if(numSkull < 3){
@@ -75,6 +73,8 @@ public class Player {
             }
         }
         score+=(count*100); 
+        System.out.println(score);
+        System.out.println("------------------");
     }
 
 

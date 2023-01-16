@@ -6,8 +6,11 @@ public class PiratenKarpen {
         System.out.println("Welcome to Piraten Karpen Simulator!");
         System.out.println("This is one turn!");
         Player p1 = new Player();
-        p1.rollEight();
-        System.out.println(p1.getScore());
+
+
+        while(p1.score < 6000){
+            p1.rollEight();
+        }
 
         System.out.println("That's all folks!");
     }
