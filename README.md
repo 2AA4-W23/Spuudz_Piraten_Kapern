@@ -29,11 +29,11 @@ Remark: **We are assuming here you are using a _real_ shell (e.g., anything but 
 
 | MVP? | Id  | Feature  | Status  |  Started  | Delivered |
 | :-:  |:-:  |---       | :-:     | :-:       | :-:       |
-| x   | F01 | Roll a dice |  S | 01/01/23 |  01/16/23 |
-| x   | F02 | Roll eight dices  |  B (F01) | 01/16/23  | 01/16/23 | 
+| x   | F01 | Roll a dice |  D | 01/01/23 |  01/16/23 |
+| x   | F02 | Roll eight dices  |  D | 01/16/23  | 01/16/23 | 
 | x   | F03 | Play 42 games each simulation  |  P  |   |
 | x   | F04 | End the turn when the player obtains 3 skulls | P | |
-| x   | F05 | Player chooses which dice to keep randomly | B (F02) | | 
+| x   | F05 | Player chooses which dice to keep randomly | P | | 
 | x   | F06 | Score points: count num of gold coins and diamonds and \*100| B (F04) | |
 | x   | F07 | Simulation ends when one player's score exceeds 6000 | P | |
 | x   | F08 | Calculate and display each player's win percentage | P | | 
