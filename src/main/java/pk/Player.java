@@ -14,6 +14,9 @@ public class Player {
             currentHand.add("PLACEHOLDER");
         }
     }
+    public void setScore(int value){
+        score = value;
+    }
     public int getScore(){
         return score;
     }
