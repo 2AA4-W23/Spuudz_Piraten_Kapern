@@ -1,8 +1,11 @@
 package pk;
 import java.util.ArrayList;
 import java.util.Random;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class Player {
+    private static final Logger logger = LogManager.getLogger(Player.class);
     public int score;
     public int numSkull;
     public ArrayList<String> currentHand = new ArrayList<String>();
@@ -33,12 +36,12 @@ public class Player {
                 String myRoll = myDice.roll().toString();
                 randomHand.add(myRoll);
             }
-            System.out.println("Initial Roll: " + randomHand);
+            logger.debug("Initial Roll: " + randomHand);
             removeSkulls(randomHand);
             while(numSkull<3){
-                System.out.println("Reroll!");
+                logger.debug("Reroll!");
                 reroll(randomHand,myDice,numSkull);
-                System.out.println(randomHand);
+                logger.debug(randomHand);
                 removeSkulls(randomHand);
             }
         currentHand = randomHand;
@@ -52,7 +55,7 @@ public class Player {
                 i--;
             }
         }
-        System.out.println(numSkull + " skull(s) found overall.\n");
+        logger.debug(numSkull + " skull(s) found overall.\n");
     }
     public void reroll(ArrayList<String> randomHand, Dice myDice,int numSkull){
         if(numSkull < 3){
@@ -76,8 +79,8 @@ public class Player {
             }
         }
         score+=(count*100); 
-        System.out.println(score);
-        System.out.println("------------------");
+        logger.debug(score);
+        logger.debug("------------------");
     }
 
 
