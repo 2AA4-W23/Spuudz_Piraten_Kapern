@@ -41,5 +41,6 @@ Remark: **We are assuming here you are using a _real_ shell (e.g., anything but 
 | x   | F08 | Calculate and display each player's win percentage | D | 01/16/23 | 01/16/23 |  
 | x   | F09 | Score points: 'num' of a kind | P | | |
 | x   | F10 | New player strategy: Maximize Combos | P | |
+| x   | F11 | Allow strategy specification from command line | P | | 
 | ... | ... | ... |
 
