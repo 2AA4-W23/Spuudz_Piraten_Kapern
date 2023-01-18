@@ -22,7 +22,7 @@ public class PiratenKarpen {
                     p2.rollEight();
                 }
             }
-            if(p1.getScore() >= 6000){ 
+            if(p1.getScore() >= 6000 && p1.getScore() > p2.getScore()){ 
                 System.out.println("P1 wins!!");
                 p1Win++;
             }
