@@ -15,6 +15,8 @@
     * `mvn package`
   * To run the packaged delivery:
     * `java -jar target/piraten-karpen-jar-with-dependencies.jar` 
+  * To enable logging statements:
+    * `in the file ./main/log4j2.xml, change the root level from "OFF" to "ALL"`
 
 Remark: **We are assuming here you are using a _real_ shell (e.g., anything but PowerShell on Windows)**
 
