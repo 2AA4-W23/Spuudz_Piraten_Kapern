@@ -10,6 +10,7 @@ public class Player {
     public int score;
     public int numSkull;
     public ArrayList<String> currentHand = new ArrayList<String>();
+    public String strategy;
 
     public Player(){
         score = 0;
@@ -17,6 +18,9 @@ public class Player {
         for(int i = 0; i < 8;i++){
             currentHand.add("PLACEHOLDER");
         }
+    }
+    public void setStrat(String strat){
+        strategy = strat;
     }
     public void setScore(int value){
         score = value;
@@ -32,32 +36,49 @@ public class Player {
     public void rollEight(){
         ArrayList<String> randomHand = new ArrayList<String>();
         numSkull = 0;
-        boolean endTurn = false;
         Dice myDice = new Dice();
             for (int i = 0; i < 8; i++){
                 String myRoll = myDice.roll().toString();
                 randomHand.add(myRoll);
             }
+        Collections.sort(randomHand);
+        logger.debug("Initial Roll: " + randomHand);
+        removeSkulls(randomHand);
+
+        if(strategy.equals("combo")){
+            randomHand = comboStrat(myDice,randomHand);
+        }
+        else if (strategy.equals("random")){
+            logger.debug("Reroll!");
+            randomHand = reroll(randomHand,myDice,numSkull);
             Collections.sort(randomHand);
-            logger.debug("Initial Roll: " + randomHand);
+            logger.debug(randomHand);
             removeSkulls(randomHand);
-            while(numSkull<3 && endTurn == false){
-                int temp_score = 0;
-                if(updateScore(temp_score,randomHand) >= 300){
-                    endTurn = true;
-                }
-                else {
-                    logger.debug("Reroll!");
-                    reroll(randomHand,myDice,numSkull);
-                    Collections.sort(randomHand);
-                    logger.debug(randomHand);
-                    removeSkulls(randomHand);
-                }
-            }
+        }
+
         currentHand = randomHand;
         if(numSkull < 3)
             score = updateScore(score,currentHand);
     }
+
+    public ArrayList<String> comboStrat(Dice myDice, ArrayList<String> randomHand){
+        boolean endTurn = false;
+        while(numSkull<3 && endTurn == false){
+            int temp_score = 0;
+            if(updateScore(temp_score,randomHand) >= 300){
+                endTurn = true;
+            }
+            else {
+                logger.debug("Reroll!");
+                randomHand = reroll(randomHand,myDice,numSkull);
+                Collections.sort(randomHand);
+                logger.debug(randomHand);
+                removeSkulls(randomHand);
+            }
+        }
+        return randomHand;
+    }
+
     public void removeSkulls(ArrayList<String> randomHand){
         for(int i = 0; i < randomHand.size(); i++){
             if(randomHand.get(i) == "SKULL"){
@@ -68,7 +89,7 @@ public class Player {
         }
         logger.debug(numSkull + " skull(s) found overall.\n");
     }
-    public void reroll(ArrayList<String> randomHand, Dice myDice,int numSkull){
+    public ArrayList<String> reroll(ArrayList<String> randomHand, Dice myDice,int numSkull){
         if(numSkull < 3){
             Random rand = new Random();
             int changeRoll = rand.nextInt(randomHand.size()+1);
@@ -77,6 +98,7 @@ public class Player {
                 randomHand.set(j,myDice.roll().toString());
             }
         }
+        return randomHand;
     }
 
     public int updateScore(int score, ArrayList<String> currentHand){
@@ -86,15 +108,18 @@ public class Player {
         int temp = 0;
 
         for(int i = 0; i < currentHand.size(); i++){
-            temp=0;
             if (currentHand.get(i) == "DIAMOND" || currentHand.get(i) == "GOLD"){
                 count++;
             }
-            for(int j = i; j < currentHand.size(); j++){
-                if (currentHand.get(i) == currentHand.get(j) && currentHand.get(i) != "SKULL")
+        }
+
+        for(int l = 0; l < currentHand.size();l++){
+            temp = 0;
+            for(int j = l; j < currentHand.size(); j++){
+                if (currentHand.get(l) == currentHand.get(j) && currentHand.get(l) != "SKULL")
                     temp++;
             }
-            i+=temp-1;
+            l+=temp-1;
             combo.add(temp);
         }
 
@@ -113,7 +138,7 @@ public class Player {
                 score+=4000;
         }
 
-
+        logger.debug(count);
         score+=(count*100); 
         logger.debug(combo);
         logger.debug(score);

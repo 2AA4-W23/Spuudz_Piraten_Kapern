@@ -15,7 +15,10 @@ public class PiratenKarpen {
 
         while(game < 42){
             Player p1 = new Player();
+            p1.setStrat(args[0]);
             Player p2 = new Player();
+            p2.setStrat(args[1]);
+
             while(p1.getScore() < 6000 && p2.getScore() < 6000){
                 logger.info("P1 Turn: \n");
                 p1.rollEight();
@@ -45,10 +48,6 @@ public class PiratenKarpen {
         System.out.println("P1: " + p1Percent + " P2 " + p2Percent);
 
         System.out.println("That's all folks!");
-        System.out.println(args[0]);
-        System.out.println(args[1]);
-
-        
     }
     
 }
