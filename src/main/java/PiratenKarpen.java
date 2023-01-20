@@ -9,15 +9,13 @@ public class PiratenKarpen {
     public static void main(String[] args) {
         System.out.println("Welcome to Piraten Karpen Simulator!");
         System.out.println("Simulating 42 games!");
-        Player p1 = new Player();
-        Player p2 = new Player();
         int game = 0;
         int p1Win = 0;
         int p2Win = 0;
 
         while(game < 42){
-            p1.setScore(0);
-            p2.setScore(0);
+            Player p1 = new Player();
+            Player p2 = new Player();
             while(p1.getScore() < 6000 && p2.getScore() < 6000){
                 logger.info("P1 Turn: \n");
                 p1.rollEight();
