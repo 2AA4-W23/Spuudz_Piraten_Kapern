@@ -49,6 +49,7 @@ public class Player {
                 else {
                     logger.debug("Reroll!");
                     reroll(randomHand,myDice,numSkull);
+                    Collections.sort(randomHand);
                     logger.debug(randomHand);
                     removeSkulls(randomHand);
                 }
@@ -83,7 +84,6 @@ public class Player {
         ArrayList<Integer> combo = new ArrayList<Integer>();
         int count = 0;
         int temp = 0;
-        int max = 0;
 
         for(int i = 0; i < currentHand.size(); i++){
             temp=0;
@@ -95,23 +95,21 @@ public class Player {
                     temp++;
             }
             i+=temp-1;
-            if(temp > max)
-                max = temp;
             combo.add(temp);
         }
 
         for(int k = 0; k < combo.size(); k++){
-            if (max==3)
+            if (combo.get(k)==3)
                 score+=100;
-            else if(max==4)
+            else if(combo.get(k)==4)
                 score+=200;
-            else if(max==5)
+            else if(combo.get(k)==5)
                 score+=500;
-            else if(max==6)
+            else if(combo.get(k)==6)
                 score+=1000;
-            else if(max==7)
+            else if(combo.get(k)==7)
                 score+=2000;
-            else if(max==8)
+            else if(combo.get(k)==8)
                 score+=4000;
         }
 
