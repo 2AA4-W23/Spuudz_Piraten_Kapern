@@ -1,6 +1,7 @@
 package pk;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Collections;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -31,21 +32,30 @@ public class Player {
     public void rollEight(){
         ArrayList<String> randomHand = new ArrayList<String>();
         numSkull = 0;
+        boolean endTurn = false;
         Dice myDice = new Dice();
             for (int i = 0; i < 8; i++){
                 String myRoll = myDice.roll().toString();
                 randomHand.add(myRoll);
             }
+            Collections.sort(randomHand);
             logger.debug("Initial Roll: " + randomHand);
             removeSkulls(randomHand);
-            while(numSkull<3){
-                logger.debug("Reroll!");
-                reroll(randomHand,myDice,numSkull);
-                logger.debug(randomHand);
-                removeSkulls(randomHand);
+            while(numSkull<3 && endTurn == false){
+                int temp_score = 0;
+                if(updateScore(temp_score,randomHand) >= 300){
+                    endTurn = true;
+                }
+                else {
+                    logger.debug("Reroll!");
+                    reroll(randomHand,myDice,numSkull);
+                    logger.debug(randomHand);
+                    removeSkulls(randomHand);
+                }
             }
         currentHand = randomHand;
-        updateScore();
+        if(numSkull < 3)
+            score = updateScore(score,currentHand);
     }
     public void removeSkulls(ArrayList<String> randomHand){
         for(int i = 0; i < randomHand.size(); i++){
@@ -68,11 +78,10 @@ public class Player {
         }
     }
 
-    public void updateScore(){
+    public int updateScore(int score, ArrayList<String> currentHand){
         logger.debug("Previous score: " + score);
-        ArrayList<Integer> combo = new ArrayList<Integer>(); 
+        ArrayList<Integer> combo = new ArrayList<Integer>();
         int count = 0;
-        int stack = 0;
         int temp = 0;
         int max = 0;
 
@@ -82,20 +91,16 @@ public class Player {
                 count++;
             }
             for(int j = i; j < currentHand.size(); j++){
-                if (currentHand.get(i) == currentHand.get(j))
+                if (currentHand.get(i) == currentHand.get(j) && currentHand.get(i) != "SKULL")
                     temp++;
             }
+            i+=temp-1;
             if(temp > max)
                 max = temp;
             combo.add(temp);
         }
 
         for(int k = 0; k < combo.size(); k++){
-            if(combo.get(k) == max)
-                stack++;
-        }
-
-        for(int a = 0; a < stack; a++){
             if (max==3)
                 score+=100;
             else if(max==4)
@@ -110,10 +115,12 @@ public class Player {
                 score+=4000;
         }
 
+
         score+=(count*100); 
-        logger.debug(max + ":combo | stack:" + stack);
+        logger.debug(combo);
         logger.debug(score);
         logger.debug("------------------");
+        return score;
     }
 
 
