@@ -45,6 +45,8 @@ public class PiratenKarpen {
         System.out.println("P1: " + p1Percent + " P2 " + p2Percent);
 
         System.out.println("That's all folks!");
+        System.out.println(args[0]);
+        System.out.println(args[1]);
 
         
     }
