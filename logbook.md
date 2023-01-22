@@ -2,7 +2,7 @@
 
 16/01/2023 - Finished features 01-08 (full MVP)
 
-18/01/2023 - Started step 4, updated the backlog and completed feature 9
+18/01/2023 - Added logging capabilities, started step 4, updated the backlog and completed feature 9
 
 19/01/2023 - Continued work on step 4, thinking on how to implement a strategy
 
