@@ -58,19 +58,22 @@ public class Player {
 
         currentHand = randomHand;
         if(numSkull < 3)
-            score = updateScore(score,currentHand);
+            score = updateScore(score,currentHand)[0];
     }
 
     public ArrayList<String> comboStrat(Dice myDice, ArrayList<String> randomHand){
         boolean endTurn = false;
+        String comboCard = "";
         while(numSkull<3 && endTurn == false){
             int temp_score = 0;
-            if(updateScore(temp_score,randomHand) >= 300){
+            if(updateScore(temp_score,randomHand)[1] >= 4 || updateScore(temp_score,randomHand)[0] >= 400){
                 endTurn = true;
             }
             else {
                 logger.debug("Reroll!");
-                randomHand = reroll(randomHand,myDice,numSkull);
+                comboCard = getHighestCombo(randomHand);
+                logger.debug("Trying to roll for " + comboCard);
+                randomHand = comboReroll(randomHand,myDice,numSkull,comboCard);
                 Collections.sort(randomHand);
                 logger.debug(randomHand);
                 removeSkulls(randomHand);
@@ -100,12 +103,42 @@ public class Player {
         }
         return randomHand;
     }
+    public ArrayList<String> comboReroll(ArrayList<String> randomHand, Dice myDice, int numSkull, String card){
+        if(numSkull < 3){
 
-    public int updateScore(int score, ArrayList<String> currentHand){
+            for(int j = 0; j < randomHand.size();j++){
+                if(randomHand.get(j) != card)
+                    randomHand.set(j,myDice.roll().toString());
+            }
+        }
+        return randomHand;
+    }
+
+    public String getHighestCombo(ArrayList<String> randomHand){
+        int temp = 0;
+        int max = 0;
+        String cardMax = "";
+        for(int l = 0; l < randomHand.size();l++){
+            temp = 0;
+            for(int j = l; j < randomHand.size(); j++){
+                if (randomHand.get(l) == randomHand.get(j) && randomHand.get(l) != "SKULL")
+                    temp++;
+            }
+            if (temp > max || (temp == max && (randomHand.get(l).equals("DIAMOND") || randomHand.get(l).equals("GOLD")))){
+                max = temp;
+                cardMax = randomHand.get(l);
+            }
+            l+=temp-1;
+        }
+        return cardMax;
+    }
+
+    public int[] updateScore(int score, ArrayList<String> currentHand){
         logger.debug("Previous score: " + score);
         ArrayList<Integer> combo = new ArrayList<Integer>();
         int count = 0;
         int temp = 0;
+        int max = 0;
 
         for(int i = 0; i < currentHand.size(); i++){
             if (currentHand.get(i) == "DIAMOND" || currentHand.get(i) == "GOLD"){
@@ -118,6 +151,9 @@ public class Player {
             for(int j = l; j < currentHand.size(); j++){
                 if (currentHand.get(l) == currentHand.get(j) && currentHand.get(l) != "SKULL")
                     temp++;
+            }
+            if (temp > max){
+                max = temp;
             }
             l+=temp-1;
             combo.add(temp);
@@ -143,7 +179,10 @@ public class Player {
         logger.debug(combo);
         logger.debug(score);
         logger.debug("------------------");
-        return score;
+
+        int[] arr = {score,max};
+
+        return arr;
     }
 
 
