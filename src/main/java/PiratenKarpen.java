@@ -1,53 +1,24 @@
-import pk.Player;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-
+import pk.*;
 public class PiratenKarpen {
-    private static final Logger logger = LogManager.getLogger(PiratenKarpen.class);
 
     public static void main(String[] args) {
         System.out.println("Welcome to Piraten Karpen Simulator!");
         System.out.println("Simulating 42 games!");
         int game = 0;
-        int p1Win = 0;
-        int p2Win = 0;
+
+        Game piratenGame = new Game();
+        Strategy p1 = new Strategy();
+        p1.setStrat(args[0]);
+        Strategy p2 = new Strategy();
+        p2.setStrat(args[1]);
 
         while(game < 42){
-            Player p1 = new Player();
-            p1.setStrat(args[0]);
-            Player p2 = new Player();
-            p2.setStrat(args[1]);
-
-            while(p1.getScore() < 6000 && p2.getScore() < 6000){
-                logger.info("P1 Turn: \n");
-                p1.rollEight();
-                logger.info("P2 Turn: \n");
-                p2.rollEight();
-            }
-            while(p1.getScore() == p2.getScore()){
-                logger.info("P1 Turn: \n");
-                p1.rollEight();
-                logger.info("P2 Turn: \n");
-                p2.rollEight();
-            }
-            if(p1.getScore() > p2.getScore()){ 
-                logger.info("P1 wins!!");
-                p1Win++;
-            }
-            else{
-                logger.info("P2 wins!!");
-                p2Win++;
-            }
+            piratenGame.turn(p1,p2);
             game++;
         }
-        double p1Percent = (p1Win/42.0)*100.0;
-        double p2Percent = (p2Win/42.0)*100.0;
-
-        System.out.println("Win Percents:");
-        System.out.println("P1: " + p1Percent + " P2 " + p2Percent);
+        System.out.println("Player1 win percent: " + piratenGame.calcPercent(p1) + "%");
+        System.out.println("Player2 win percent: " + piratenGame.calcPercent(p2) + "%");
 
         System.out.println("That's all folks!");
     }
-    
 }
