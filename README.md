@@ -42,5 +42,8 @@ Remark: **We are assuming here you are using a _real_ shell (e.g., anything but 
 | x   | F09 | Score points: 'num' of a kind | P | 01/18/23 | 01/19/23 |
 | x   | F10 | New player strategy: Maximize Combos | D | 01/20/23 | 01/20/23 |
 | x   | F11 | Allow strategy specification from command line | D | 01/20/23 | 01/20/23 |
+| x   | F12 | Implement deck of cards, 6 sea battle and 29 nop, 1 card drawn before roll | P | 01/26/23 | |
+| x   | F13 | Implement sea battle card effect | P | 01/26/23 | |
+| x   | F14 | Provide new strategy revolving around sea battle card effect | P | 01/26/23 | |
 | ... | ... | ... |
 
