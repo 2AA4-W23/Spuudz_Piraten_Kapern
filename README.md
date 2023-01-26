@@ -40,7 +40,7 @@ Remark: **We are assuming here you are using a _real_ shell (e.g., anything but 
 | x   | F07 | Simulation ends when one player's score exceeds 6000 | D | 01/16/23 | 01/16/23 |
 | x   | F08 | Calculate and display each player's win percentage | D | 01/16/23 | 01/16/23 |  
 | x   | F09 | Score points: 'num' of a kind | P | 01/18/23 | 01/19/23 |
-| x   | F10 | New player strategy: Maximize Combos | P | 01/20/23 | 01/20/23 |
-| x   | F11 | Allow strategy specification from command line | P | 01/20/23 | 01/20/23 |
+| x   | F10 | New player strategy: Maximize Combos | D | 01/20/23 | 01/20/23 |
+| x   | F11 | Allow strategy specification from command line | D | 01/20/23 | 01/20/23 |
 | ... | ... | ... |
 
