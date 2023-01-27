@@ -9,19 +9,33 @@ import org.apache.logging.log4j.Logger;
 public class Strategy extends Player{
     private static final Logger logger = LogManager.getLogger(Strategy.class);
     public String strategy;
+    public int requiredSabers;
 
     public void setStrat(String strat){
         strategy = strat;
     }
 
     public void strategyReroll(){
+        Random rand = new Random();
+
+        if(drawnCard.equals("Sea Battle")){
+            requiredSabers = rand.nextInt(2)+2;
+            logger.debug("Sabers Required: " + requiredSabers);
+        }
+
         if (strategy.equals("combo")){
-            comboStrat(myDice,currentHand);
+            if(drawnCard.equals("Sea Battle")){
+                saberStrat(myDice, currentHand);
+            }
+            else
+                comboStrat(myDice,currentHand);
         }
         else{
             randomReroll(currentHand,myDice);
         }
-        if(numSkull < 3)
+        if(drawnCard.equals("Sea Battle") && numSkull < 3)
+            seaBattleScore();
+        else if(numSkull < 3)
             score = updateScore(score,currentHand)[0];
     }
     
@@ -38,6 +52,31 @@ public class Strategy extends Player{
                 comboCard = getHighestCombo(randomHand);
                 logger.debug("Trying to roll for " + comboCard);
                 randomHand = comboReroll(randomHand,myDice,numSkull,comboCard);
+                Collections.sort(randomHand);
+                logger.debug(randomHand);
+                removeSkulls(randomHand);
+            }
+        }
+        return randomHand;
+    }
+
+    public ArrayList<String> saberStrat(Dice myDice, ArrayList<String> randomHand){
+        boolean endTurn = false;
+        while(numSkull<3 && endTurn == false){
+            int saberNum = 0;
+
+            for(int i = 0; i < randomHand.size();i++){
+                if(randomHand.get(i).equals("SABER"))
+                    saberNum++;
+            }
+
+            if(saberNum > requiredSabers){
+                endTurn = true;
+            }
+            else {
+                logger.debug("Reroll!");
+                logger.debug("Trying to roll for SABER");
+                randomHand = saberReroll(randomHand,myDice,numSkull);
                 Collections.sort(randomHand);
                 logger.debug(randomHand);
                 removeSkulls(randomHand);
@@ -73,6 +112,17 @@ public class Strategy extends Player{
         return randomHand;
     }
 
+    public ArrayList<String> saberReroll(ArrayList<String> randomHand, Dice myDice, int numSkull){
+        if(numSkull < 3){
+
+            for(int j = 0; j < randomHand.size();j++){
+                if(randomHand.get(j) != "SABER")
+                    randomHand.set(j,myDice.roll().toString());
+            }
+        }
+        return randomHand;
+    }
+
     public String getHighestCombo(ArrayList<String> randomHand){
         int temp = 0;
         int max = 0;
@@ -90,5 +140,24 @@ public class Strategy extends Player{
             l+=temp-1;
         }
         return cardMax;
+    }
+
+    public void seaBattleScore(){
+        int saberNum = 0;
+
+        for(int i = 0; i < currentHand.size();i++){
+            if(currentHand.get(i).equals("SABER"))
+                saberNum++;
+        }
+
+        if(saberNum >= requiredSabers){
+            logger.debug("Required num of sabers reached: score increased!");
+            score+=500;
+            logger.debug("New score: " + score);
+            updateScore(score,currentHand);
+        }
+        else{
+            logger.info("Required num of sabers not reached, no points");
+        }
     }
 }

@@ -11,6 +11,7 @@ public class Player {
     public int numWins;
     public ArrayList<String> currentHand = new ArrayList<String>();
     public Dice myDice = new Dice();
+    public String drawnCard;
 
     public Player(){
         score = 0;
@@ -18,6 +19,11 @@ public class Player {
         for(int i = 0; i < 8;i++){
             currentHand.add("PLACEHOLDER");
         }
+    }
+
+    public void setCard(String card){
+        drawnCard = card;
+        logger.debug(card);
     }
     public void setScore(int value){
         score = value;
