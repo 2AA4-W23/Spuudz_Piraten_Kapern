@@ -13,7 +13,7 @@ public class Game {
         for(int i = 0; i < 6; i++){
             deck.add("Sea Battle");
         }
-        for(int j = 0; j < 29; j++){
+        for(int j = 0; j < 25; j++){
             deck.add("nop");
         }
         for(int k = 0; k < 4; k++){
@@ -54,7 +54,7 @@ public class Game {
             logger.info(card + " card drawn!");
             p1.initialRoll();
             p1.strategyReroll();
-            
+
             logger.info("P2 Turn: \n");
             card = drawCard();
             p2.setCard(card);

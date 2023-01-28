@@ -23,7 +23,6 @@ public class Player {
 
     public void setCard(String card){
         drawnCard = card;
-        logger.debug(card);
     }
     public void setScore(int value){
         score = value;
@@ -74,6 +73,11 @@ public class Player {
         for(int i = 0; i < currentHand.size(); i++){
             if (currentHand.get(i) == "DIAMOND" || currentHand.get(i) == "GOLD"){
                 count++;
+            }
+            if(drawnCard.equals("Monkey Business")){
+                if(currentHand.get(i).equals("PARROT")){
+                    currentHand.set(i,"MONKEY");
+                }
             }
         }
 
