@@ -44,6 +44,7 @@ Remark: **We are assuming here you are using a _real_ shell (e.g., anything but 
 | x   | F11 | Allow strategy specification from command line | D | 01/20/23 | 01/20/23 |
 | x   | F12 | Implement deck of cards, 6 sea battle and 29 nop, 1 card drawn before roll | D | 01/26/23 | 01/27/23 |
 | x   | F13 | Implement sea battle card effect | D | 01/26/23 | 01/27/23|
-| x   | F14 | Provide new strategy revolving around sea battle card effect | D | 01/26/23 | 01/27/23 |
+| x   | F14 | Provide new strategy revolving around sea battle card effect | D | 01/26/23 | 01/27/23 | 
+| x   | F15 | Add Monkey Business cards to the deck | D | 01/28/23 | 01/28/23 | 
 | ... | ... | ... |
 
