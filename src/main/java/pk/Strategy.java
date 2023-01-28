@@ -76,7 +76,7 @@ public class Strategy extends Player{
             else {
                 logger.debug("Reroll!");
                 logger.debug("Trying to roll for SABER");
-                randomHand = saberReroll(randomHand,myDice,numSkull);
+                randomHand = comboReroll(randomHand,myDice,numSkull,"SABER");
                 Collections.sort(randomHand);
                 logger.debug(randomHand);
                 removeSkulls(randomHand);
@@ -106,17 +106,6 @@ public class Strategy extends Player{
 
             for(int j = 0; j < randomHand.size();j++){
                 if(randomHand.get(j) != card)
-                    randomHand.set(j,myDice.roll().toString());
-            }
-        }
-        return randomHand;
-    }
-
-    public ArrayList<String> saberReroll(ArrayList<String> randomHand, Dice myDice, int numSkull){
-        if(numSkull < 3){
-
-            for(int j = 0; j < randomHand.size();j++){
-                if(randomHand.get(j) != "SABER")
                     randomHand.set(j,myDice.roll().toString());
             }
         }
