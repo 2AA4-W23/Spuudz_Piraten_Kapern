@@ -45,6 +45,7 @@ Remark: **We are assuming here you are using a _real_ shell (e.g., anything but 
 | x   | F12 | Implement deck of cards, 6 sea battle and 29 nop, 1 card drawn before roll | D | 01/26/23 | 01/27/23 |
 | x   | F13 | Implement sea battle card effect | D | 01/26/23 | 01/27/23|
 | x   | F14 | Provide new strategy revolving around sea battle card effect | D | 01/26/23 | 01/27/23 | 
-| x   | F15 | Implement Monkey Business Logic | D | 01/28/23 | 01/28/23 | 
+| x   | F15 | Add Monkey Business Card to deck | D | 01/28/23 | 01/28/23 | 
+| x   | F16 | Implement Monkey Business logic to scoring system | D | 01/28/23 | 01/28/23 | 
 | ... | ... | ... |
 
