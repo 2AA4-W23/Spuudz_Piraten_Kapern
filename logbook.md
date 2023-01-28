@@ -7,3 +7,9 @@
 19/01/2023 - Continued work on step 4, thinking on how to implement a strategy
 
 20/01/2023 - Finished a basic strategy and finished the command line arguement strategy selector. Made the decision to implement just the simple version of the strategy and possibly upgrade it to a more complicated version next iteration.
+
+24/01/2023 - Restructured all code into more organized and shorter classes.
+
+26/01/2023 - Started work on step 5, created a deck and put cards into it.
+
+27/01/2023 - Finished the unique score counting of the sea battle card, and modified the combo strategy player to reroll for the required number of sabers.
