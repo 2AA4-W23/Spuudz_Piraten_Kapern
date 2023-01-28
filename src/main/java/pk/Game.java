@@ -16,6 +16,9 @@ public class Game {
         for(int j = 0; j < 29; j++){
             deck.add("nop");
         }
+        for(int k = 0; k < 4; k++){
+            deck.add("Monkey Business");
+        }
     }
 
     public String getCard(){
@@ -33,15 +36,14 @@ public class Game {
             logger.info("P1 Turn: \n");
             card = drawCard();
             p1.setCard(card);
-            if(card.equals("Sea Battle"))
-                logger.info("Sea Battle Drawn!");
+            logger.info(card + " card drawn!");
             p1.initialRoll();
             p1.strategyReroll();
+
             logger.info("P2 Turn: \n");
             card = drawCard();
             p2.setCard(card);
-            if(card.equals("Sea Battle"))
-                logger.info("Sea Battle Drawn!");
+            logger.info(card + " card drawn!");
             p2.initialRoll();
             p2.strategyReroll();
         }
@@ -49,15 +51,14 @@ public class Game {
             logger.info("P1 Turn: \n");
             card = drawCard();
             p1.setCard(card);
-            if(card.equals("Sea Battle"))
-                logger.info("Sea Battle Drawn!");
+            logger.info(card + " card drawn!");
             p1.initialRoll();
             p1.strategyReroll();
+            
             logger.info("P2 Turn: \n");
             card = drawCard();
             p2.setCard(card);
-            if(card.equals("Sea Battle"))
-                logger.info("Sea Battle Drawn!");
+            logger.info(card + " card drawn!");
             p2.initialRoll();
             p2.strategyReroll();
         }
