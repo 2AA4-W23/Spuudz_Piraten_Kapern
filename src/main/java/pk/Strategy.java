@@ -51,7 +51,10 @@ public class Strategy extends Player{
                 logger.debug("Reroll!");
                 comboCard = getHighestCombo(randomHand);
                 logger.debug("Trying to roll for " + comboCard);
-                randomHand = comboReroll(randomHand,myDice,numSkull,comboCard);
+                if(drawnCard.equals("Monkey Business"))
+                    monkeyReroll(randomHand,myDice,numSkull,comboCard);
+                else
+                    randomHand = comboReroll(randomHand,myDice,numSkull,comboCard);
                 Collections.sort(randomHand);
                 logger.debug(randomHand);
                 removeSkulls(randomHand);
@@ -107,6 +110,24 @@ public class Strategy extends Player{
             for(int j = 0; j < randomHand.size();j++){
                 if(randomHand.get(j) != card)
                     randomHand.set(j,myDice.roll().toString());
+            }
+        }
+        return randomHand;
+    }
+
+    public ArrayList<String> monkeyReroll(ArrayList<String> randomHand, Dice myDice, int numSkull, String card){
+        if(numSkull < 3){
+            if(card.equals("MONKEY") || card.equals("PARROT")){
+                for(int j = 0; j < randomHand.size();j++){
+                    if(!(randomHand.get(j).equals("MONKEY")) && !(randomHand.get(j).equals("PARROT")))
+                        randomHand.set(j,myDice.roll().toString());
+                }
+            }
+            else {
+                for(int j = 0; j < randomHand.size();j++){
+                    if(!(randomHand.get(j).equals(card)))
+                        randomHand.set(j,myDice.roll().toString());
+                }
             }
         }
         return randomHand;
